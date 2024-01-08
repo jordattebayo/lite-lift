@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 type Inputs = {
   example: string;
   exampleRequired: string;
@@ -17,9 +17,9 @@ function SessionPage(props: SessionProps) {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const location = useLocation();
+  const { sessionId } = useParams();
 
-  console.log(location);
+  console.log(sessionId);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
@@ -27,7 +27,7 @@ function SessionPage(props: SessionProps) {
   if (props.new) console.log('new session called');
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex-column">
-      <input defaultValue="test" {...register('example')} />
+      <input defaultValue={sessionId} {...register('example')} />
       <input {...register('exampleRequired', { required: true })} />
       {errors.exampleRequired && <span>This field is required</span>}
       <input type="submit" />
