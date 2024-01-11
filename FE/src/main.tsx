@@ -7,7 +7,6 @@ import './index.css';
 import SessionPage from './pages/session/SessionPage.tsx';
 import { SessionsPage } from './pages/session/SessionsPage.tsx';
 import { AccountPage } from './pages/account/Account.tsx';
-import { loader as sessionLoader } from './shared/loader.ts';
 
 const router = createBrowserRouter([
   {
@@ -18,7 +17,6 @@ const router = createBrowserRouter([
       {
         path: 'session',
         element: <SessionsPage />,
-        loader: sessionLoader,
         errorElement: <ErrorPage />,
       },
       {
