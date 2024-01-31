@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Web.Resource;
 using BE.DataAccess;
 using BE.Models;
+using System.Net;
 
-namespace BE.Controllers;
+namespace BE.Controllers
 {
     //[Authorize]
     [ApiController]
@@ -16,7 +17,7 @@ namespace BE.Controllers;
         private readonly IDataAccessProvider _dataAccessProvider;
         private readonly ILogger _logger;
 
-        public UserController(IConfiguration configuration, ILogger<User> logger)
+        public UserController(IConfiguration configuration, ILogger<User> logger, IDataAccessProvider dataAccessProvider)
         {
             _dataAccessProvider = dataAccessProvider;
             _configuration = configuration;
@@ -24,9 +25,10 @@ namespace BE.Controllers;
         }
 
         [HttpGet(Name = "GetAllUsers")]
-        public IEnumerable<Users> GetAllUsers()
+        public IEnumerable<User> GetAllUsers()
         {
-            return _dataAccessProvider.GetAllUsers();
+            var users = _dataAccessProvider.GetAllUsers();
+            return users;
         }
         
 

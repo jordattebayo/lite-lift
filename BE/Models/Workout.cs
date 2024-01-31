@@ -37,7 +37,7 @@ public enum Status
 public class Routine
 {
     public Guid Sid { get; set; }
-    public string Name { get; set; }
+    public string? Name { get; set; }
     public string? Notes { get; set; }
     public Status Status { get; set; }
 }
