@@ -10,9 +10,9 @@ namespace BE.DataAccess
         }
     
         public DbSet<User> Users { get; set; }
-        public DbSet<Workout> Workouts { get; set; }
-        public DbSet<Set> Sets { get; set; }
-        public DbSet<Routine> Routines { get; set; }
+        //public DbSet<Workout> Workouts { get; set; }
+        //public DbSet<Set> Sets { get; set; }
+        //public DbSet<Routine> Routines { get; set; }
     
         protected override void OnModelCreating(ModelBuilder builder)
         {

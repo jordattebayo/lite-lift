@@ -23,7 +23,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<PostgreSqlContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSqlDatabase")));
+builder.Services.AddDbContext<PostgreSqlContext>(options => options.UseNpgsql("Host=localhost;Username=jordan;Password=elephant;Database=litelift_dev"));
 builder.Services.AddScoped<IDataAccessProvider, DataAccessProvider>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

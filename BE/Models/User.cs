@@ -1,3 +1,7 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+
 namespace BE.Models;
 
 public enum Role {
@@ -8,8 +12,12 @@ public enum Role {
 
 public class User
 {
+    [Key]
+    public long Id { get; set; }
     public Guid Sid { get; set; }
-    public string Username { get; set; }
-    public Role Role { get; set; }
-    public Guid[]? Follows { get; set; }
+    [StringLength(25)]
+    public string? Username { get; set; }
+    [StringLength(5)]
+    public string? Role { get; set; }
+    public string[]? Follows { get; set; }
 }
