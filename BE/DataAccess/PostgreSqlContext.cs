@@ -19,6 +19,11 @@ namespace BE.DataAccess
             base.OnModelCreating(builder);
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    => optionsBuilder
+        .UseNpgsql()
+        .UseSnakeCaseNamingConvention();
+
         public override int SaveChanges()
         {
             ChangeTracker.DetectChanges();

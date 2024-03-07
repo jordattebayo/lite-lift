@@ -101,7 +101,7 @@ namespace BE.DataAccess
             _context.Users.Add(user);
             _context.SaveChanges();
             Guid sid = user.Sid;
-            return sid;   
+            return sid;
         }
 
         public void UpdateUser(Guid sid, User updatedUser)
@@ -109,8 +109,8 @@ namespace BE.DataAccess
             var user = _context.Users.FirstOrDefault<User>(u => u.Sid == sid);
             if (user != null)
             {
-                user.Follows = updatedUser.Follows;
-                user.Role = updatedUser.Role;
+                user.Username = updatedUser.Username;
+                user.RoleId = updatedUser.RoleId;
                 _context.SaveChanges();
             }
         }

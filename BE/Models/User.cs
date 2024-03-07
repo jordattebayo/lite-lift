@@ -17,7 +17,5 @@ public class User
     public Guid Sid { get; set; }
     [StringLength(25)]
     public string? Username { get; set; }
-    [StringLength(5)]
-    public string? Role { get; set; }
-    public string[]? Follows { get; set; }
+    public Guid? RoleId { get; set; }
 }
