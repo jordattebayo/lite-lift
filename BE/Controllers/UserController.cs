@@ -9,7 +9,7 @@ namespace BE.Controllers
 {
     //[Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     //[RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
     public class UserController : ControllerBase
     {
@@ -24,6 +24,23 @@ namespace BE.Controllers
             _logger = logger;
         }
 
+        [HttpPost(Name = "AddUser")]
+        public Guid AddUser(User workout)
+        {
+            var sid = _dataAccessProvider.AddUser(workout);
+            return sid;
+        }
+        [HttpPut(Name = "UpdateUser")]
+        public void UpdateUser(User user)
+        {
+            _dataAccessProvider.UpdateUser(user.Sid, user);
+
+        }
+        [HttpDelete(Name = "DeleteUser")]
+        public void DeleteUser(Guid sid)
+        {
+            _dataAccessProvider.DeleteUser(sid);
+        }
         [HttpGet(Name = "GetAllUsers")]
         public IEnumerable<User> GetAllUsers()
         {

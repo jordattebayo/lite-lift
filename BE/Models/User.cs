@@ -12,8 +12,9 @@ public enum Role {
 
 public class User
 {
-    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public long Id { get; set; }
+    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Sid { get; set; }
     [StringLength(25)]
     public string? Username { get; set; }
