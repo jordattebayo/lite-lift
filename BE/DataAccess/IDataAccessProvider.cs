@@ -2,7 +2,7 @@ using BE.Models;
 using System.Collections.Generic;
 
 namespace BE.DataAccess
-{ 
+{
     public interface IDataAccessProvider
     {
         Guid AddWorkout(Workout workout);

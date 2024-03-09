@@ -1,22 +1,23 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
 
 namespace BE.Models;
 
-public enum Role {
-        User,
-        Super,
-        Admin
-}
-
-public class User
+public partial class User
 {
-    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-    public long Id { get; set; }
-    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public Guid Sid { get; set; }
-    [StringLength(25)]
-    public string? Username { get; set; }
+    public Guid Id { get; set; }
+
+    public string Username { get; set; } = null!;
+
     public Guid? RoleId { get; set; }
+
+    public DateTime? CreatedAt { get; set; }
+
+    public virtual ICollection<Follow> FollowFollowedUsers { get; set; } = new List<Follow>();
+
+    public virtual ICollection<Follow> FollowFollowingUsers { get; set; } = new List<Follow>();
+
+    public virtual Role? Role { get; set; }
+
+    public virtual ICollection<Workout> Workouts { get; set; } = new List<Workout>();
 }

@@ -30,7 +30,7 @@ namespace BE.Controllers
         [HttpPut(Name = "UpdateRoutine")]
         public void UpdateRoutine(Routine routine)
         {
-            _dataAccessProvider.UpdateRoutine(routine.Sid, routine);
+            _dataAccessProvider.UpdateRoutine(routine.Id, routine);
 
         }
         [HttpDelete(Name = "DeleteRoutine")]

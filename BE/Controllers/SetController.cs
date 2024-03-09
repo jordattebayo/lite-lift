@@ -29,7 +29,7 @@ namespace BE.Controllers
         [HttpPut(Name = "UpdateSet")]
         public void UpdateSet(Set set)
         {
-            _dataAccessProvider.UpdateSet(set.Sid, set);
+            _dataAccessProvider.UpdateSet(set.Id, set);
 
         }
         [HttpDelete(Name = "DeleteSet")]

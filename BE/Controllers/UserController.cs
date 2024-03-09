@@ -33,7 +33,7 @@ namespace BE.Controllers
         [HttpPut(Name = "UpdateUser")]
         public void UpdateUser(User user)
         {
-            _dataAccessProvider.UpdateUser(user.Sid, user);
+            _dataAccessProvider.UpdateUser(user.Id, user);
 
         }
         [HttpDelete(Name = "DeleteUser")]

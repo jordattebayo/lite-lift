@@ -30,7 +30,7 @@ namespace BE.Controllers
         [HttpPut(Name = "UpdateWorkout")]
         public void UpdateWorkout(Workout workout)
         {
-            _dataAccessProvider.UpdateWorkout(workout.Sid, workout);
+            _dataAccessProvider.UpdateWorkout(workout.Id, workout);
             
         }
         [HttpDelete(Name = "DeleteWorkout")]

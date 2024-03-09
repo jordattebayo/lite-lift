@@ -7,108 +7,108 @@ namespace BE.DataAccess
 {
     public class DataAccessProvider : IDataAccessProvider
     {
-        private readonly PostgreSqlContext _context;
+        private readonly LiteliftdevContext _context;
 
-        public DataAccessProvider(PostgreSqlContext context)
+        public DataAccessProvider(LiteliftdevContext context)
         {
             _context = context;
         }
 
         public Guid AddWorkout(Workout workout)
         {
-            _context.Workout.Add(workout);
+            _context.Workouts.Add(workout);
             _context.SaveChanges();
-            Guid sid = workout.Sid;
+            Guid sid = workout.Id;
             return sid;
         }
 
-        public void UpdateWorkout(Guid sid, Workout updatedWorkout)
+        public void UpdateWorkout(Guid id, Workout updatedWorkout)
         {
-            var workout = _context.Workout.FirstOrDefault<Workout>(w => w.Sid == sid);
+            var workout = _context.Workouts.FirstOrDefault<Workout>(w => w.Id == id);
             if (workout == null) return;
             workout.Notes = updatedWorkout.Notes;
             workout.Date = updatedWorkout.Date;
             workout.UserId = updatedWorkout.UserId;
-            workout.GroupId = updatedWorkout.GroupId;
+            workout.RoutineId = updatedWorkout.RoutineId;
             _context.SaveChanges();
         }
 
-        public void DeleteWorkout(Guid sid)
+        public void DeleteWorkout(Guid id)
         {
-            var workout = _context.Workout.FirstOrDefault(w => w.Sid == sid);
+            var workout = _context.Workouts.FirstOrDefault(w => w.Id == id);
             if (workout != null)
             {
-                _context.Workout.Remove(workout);
+                _context.Workouts.Remove(workout);
                 _context.SaveChanges();
             }
         }
 
-        public Workout? GetWorkoutById(Guid sid)
+        public Workout? GetWorkoutById(Guid id)
         {
-            var workout = _context.Workout.FirstOrDefault(w => w.Sid == sid);
+            var workout = _context.Workouts.FirstOrDefault(w => w.Id == id);
             return workout;
 
         }
 
         public List<Workout> GetAllWorkouts()
         {
-            return _context.Workout.ToList();
+            return _context.Workouts.ToList();
         }
 
         public Guid AddSet(Set set)
         {
-            _context.Set.Add(set);
+            _context.Sets.Add(set);
             _context.SaveChanges();
-            var sid = set.Sid;
-            return sid;
+            var id = set.Id;
+            return id;
         }
 
-        public void UpdateSet(Guid sid, Set set)
+        public void UpdateSet(Guid id, Set set)
         {
-            var newSet = _context.Set.FirstOrDefault<Set>(s => s.Sid == sid);
+            var newSet = _context.Sets.FirstOrDefault<Set>(s => s.Id == id);
             if (newSet == null) return;
             newSet.Weight = set.Weight;
             newSet.UnitId = set.UnitId;
             newSet.Reps = set.Reps;
             newSet.Order = set.Order;
             newSet.CategoryId = set.CategoryId;
-            newSet.GroupId = set.GroupId;
+            newSet.RoutineId = set.RoutineId;
             // For now Sets cannot be moved between workouts
             // Maybe add a check to see if WorkoutId exists, and reassign them
 
             _context.SaveChanges();
         }
 
-        public void DeleteSet(Guid sid)
+        public void DeleteSet(Guid id)
         {
-            var set = _context.Set.FirstOrDefault(s => s.Sid == sid);
+            var set = _context.Sets.FirstOrDefault(s => s.Id == id);
             if (set == null) return;
-            _context.Set.Remove(set);
+            _context.Sets.Remove(set);
             _context.SaveChanges();
         }
 
-        public Set? GetSetById(Guid sid)
+        public Set? GetSetById(Guid id)
         {
-            var set = _context.Set.FirstOrDefault(s => s.Sid == sid);
+            var set = _context.Sets.FirstOrDefault(s => s.Id == id);
             return set != null ? set : null;
         }
 
         public List<Set> GetAllSets()
         {
-            return _context.Set.ToList();
+            return _context.Sets.ToList();
         }
 
         public Guid AddUser(User user)
         {
             _context.Users.Add(user);
             _context.SaveChanges();
-            Guid sid = user.Sid;
-            return sid;
+            Guid id = user.Id;
+            return id;
         }
 
-        public void UpdateUser(Guid sid, User updatedUser)
+        public void UpdateUser(Guid id, User updatedUser)
         {
-            var user = _context.Users.FirstOrDefault<User>(u => u.Sid == sid);
+            var user = _context.Users.FirstOrDefault<User>(u => u.Id == id);
             if (user != null)
             {
                 user.Username = updatedUser.Username;
@@ -117,9 +117,9 @@ namespace BE.DataAccess
             }
         }
 
-        public void DeleteUser(Guid sid)
+        public void DeleteUser(Guid id)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Sid == sid);
+            var user = _context.Users.FirstOrDefault(u => u.Id == id);
             if (user != null)
             {
                 _context.Users.Remove(user);
@@ -128,9 +128,9 @@ namespace BE.DataAccess
 
         }
 
-        public User? GetUserById(Guid sid)
+        public User? GetUserById(Guid id)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Sid == sid);
+            var user = _context.Users.FirstOrDefault(u => u.Id == id);
             return user != null ? user : null;
         }
 
@@ -141,15 +141,15 @@ namespace BE.DataAccess
 
         public Guid AddRoutine(Routine routine)
         {
-            _context.Routine.Add(routine);
+            _context.Routines.Add(routine);
             _context.SaveChanges();
-            Guid sid = routine.Sid;
+            Guid sid = routine.Id;
             return sid;
         }
 
-        public void UpdateRoutine(Guid sid, Routine updatedRoutine)
+        public void UpdateRoutine(Guid id, Routine updatedRoutine)
         {
-            var routine = _context.Routine.FirstOrDefault<Routine>(r => r.Sid == sid);
+            var routine = _context.Routines.FirstOrDefault<Routine>(r => r.Id == id);
             if(routine != null)
             {
                 routine.Name = updatedRoutine.Name;
@@ -159,24 +159,24 @@ namespace BE.DataAccess
             _context.SaveChanges();
         }
 
-        public void DeleteRoutine(Guid sid)
+        public void DeleteRoutine(Guid id)
         {
-            var routine = _context.Routine.FirstOrDefault(r => r.Sid == sid);
+            var routine = _context.Routines.FirstOrDefault(r => r.Id == id);
             if (routine != null)
             {
-                _context.Routine.Remove(routine);
+                _context.Routines.Remove(routine);
                 _context.SaveChanges();
             }
         }
 
-        public Routine? GetRoutineById(Guid sid)
+        public Routine? GetRoutineById(Guid id)
         {
-            return _context.Routine.FirstOrDefault(r => r.Sid == sid);
+            return _context.Routines.FirstOrDefault(r => r.Id == id);
         }
 
         public List<Routine> GetAllRoutines()
         {
-            return _context.Routine.ToList();
+            return _context.Routines.ToList();
 
         }
     }

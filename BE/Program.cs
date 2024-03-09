@@ -13,7 +13,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 // Removing allow CORS for prod
 builder.Services.AddCors(options =>
 {
-
     options.AddPolicy(name: "*",
         builder =>
         {
@@ -23,7 +22,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<PostgreSqlContext>(options => options.UseNpgsql("Host=localhost;Username=jordan;Password=elephant1;Database=lite-lift"));
+builder.Services.AddDbContext<LiteliftdevContext>(options => options.UseNpgsql("Host=localhost;Username=jordan;Password=elephant1;Database=liteliftdev"));
 builder.Services.AddScoped<IDataAccessProvider, DataAccessProvider>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -1,18 +1,25 @@
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
+
 namespace BE.Models;
 
-public class Workout
+public partial class Workout
 {
-    [Key]
-    public long Id { get; set; }
-    public Guid Sid { get; set; }
+    public Guid Id { get; set; }
+
     public string? Notes { get; set; }
-    public Guid UserId { get; set; }
-    public Guid? GroupId { get; set; }
+
+    public Guid? UserId { get; set; }
+
+    public Guid? RoutineId { get; set; }
+
     public DateTime Date { get; set; }
+
+    public DateTime? CreatedAt { get; set; }
+
+    public virtual Routine? Routine { get; set; }
+
+    public virtual ICollection<Set> Sets { get; set; } = new List<Set>();
+
+    public virtual User? User { get; set; }
 }
-
-
